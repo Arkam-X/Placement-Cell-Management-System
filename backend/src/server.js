@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const { protect } = require("./middleware/authMiddleware");
+console.log(typeof protect);
 
 const app = express();
 
@@ -20,4 +22,11 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+app.get("/api/protected", protect, (req, res) => {
+  res.json({
+    message: "You have accessed a protected route",
+    user: req.user,
+  });
 });
