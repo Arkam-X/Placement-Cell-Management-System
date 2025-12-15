@@ -3,8 +3,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
-const { protect } = require("./middleware/authMiddleware");
-console.log(typeof protect);
+const { protect, authorize } = require("./middleware/authMiddleware");
+const companyRoutes = require("./routes/companyRoutes");
 
 const app = express();
 
@@ -30,3 +30,17 @@ app.get("/api/protected", protect, (req, res) => {
     user: req.user,
   });
 });
+
+app.get(
+  "/api/tpo-only",
+  protect,
+  authorize("TPO"),
+  (req, res) => {
+    res.json({
+      message: "Welcome TPO, you have admin access",
+      user: req.user,
+    });
+  }
+);
+
+app.use("/api/companies", companyRoutes);

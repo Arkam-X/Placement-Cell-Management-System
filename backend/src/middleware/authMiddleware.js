@@ -38,8 +38,8 @@ const protect = async(req, res, next) => {
 
 const authorize = (...roles) => {
     return(req, res, next) => {
-        if(!roles.include(req.user.role)) {
-            return res.status(402).json({
+        if(!roles.includes(req.user.role)) {
+            return res.status(403).json({
                 message: "Access denied, insufficient permission."
             });
         }

@@ -26,12 +26,10 @@ const userSchema = new mongoose.Schema(
         department: {
             type: String,
             enum: ["AIML", "IOT", "CE", "MECH", "CIVIL", "EXTC"],
-            required: true
         },
         year: {
             type: String,
             enum: ["FE", "SE", "TE", "BE"],
-            required: true
         },
         cpga: {
             type: Number
