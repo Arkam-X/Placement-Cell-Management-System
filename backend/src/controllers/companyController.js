@@ -1,4 +1,4 @@
-const ListedCompany = require("../models/ListedCompanies");
+const ListedCompany = require("../models/ListedCompany");
 
 const addCompany = async(req, res) => {
     try {

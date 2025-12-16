@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ROLES, YEARS, DEPARTMENTS } = require("../utils/constants");
 
 const userSchema = new mongoose.Schema(
     {
@@ -20,16 +21,16 @@ const userSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            enum: ["STUDENT", "TPO"],
+            enum: Object.values(ROLES),
             required: true
         },
         department: {
             type: String,
-            enum: ["AIML", "IOT", "CE", "MECH", "CIVIL", "EXTC"],
+            enum: DEPARTMENTS,
         },
         year: {
             type: String,
-            enum: ["FE", "SE", "TE", "BE"],
+            enum: YEARS
         },
         cpga: {
             type: Number

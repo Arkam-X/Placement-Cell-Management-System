@@ -32,11 +32,7 @@ app.get("/api/protected", protect, (req, res) => {
   });
 });
 
-app.get(
-  "/api/tpo-only",
-  protect,
-  authorize("TPO"),
-  (req, res) => {
+app.get("/api/tpo-only", protect, authorize("TPO"), (req, res) => {
     res.json({
       message: "Welcome TPO, you have admin access",
       user: req.user,

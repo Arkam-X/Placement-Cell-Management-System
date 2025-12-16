@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { JOB_TYPES, YEARS, DEPARTMENTS } = require("../utils/constants");
 
 const listedCompanySchema = new mongoose.Schema(
     {
@@ -14,7 +15,7 @@ const listedCompanySchema = new mongoose.Schema(
         },
         jobType:{
             type: String,
-            enum: ["FULL_TIME", "INTERNSHIP"],
+            enum: Object.values(JOB_TYPES),
             required: true
         },
         internshipDurationMonths: {
@@ -29,12 +30,12 @@ const listedCompanySchema = new mongoose.Schema(
         },
         allowedDepartments: {
             type: [String],
-            enum: ["AIML", "IOT", "CE", "MECH", "CIVIL", "EXTC"],
+            enum: DEPARTMENTS   ,
             required: true
         },
         allowedYears: {
             type: [String],
-            enum: ["FE", "SE", "TE", "BE"],
+            enum: YEARS,
             required: true
         },
         criteria: {

@@ -1,0 +1,28 @@
+const ROLES = {
+  STUDENT: "STUDENT",
+  TPO: "TPO",
+};
+
+const APPLICATION_STATUS = {
+  APPLIED: "APPLIED",
+  SHORTLISTED: "SHORTLISTED",
+  REJECTED: "REJECTED",
+  SELECTED: "SELECTED",
+};
+
+const JOB_TYPES = {
+  FULL_TIME: "FULL_TIME",
+  INTERNSHIP: "INTERNSHIP",
+};
+
+const YEARS = ["FE", "SE", "TE", "BE"];
+
+const DEPARTMENTS = ["AIML", "IOT", "CE", "MECH", "CIVIL", "EXTC"];
+
+module.exports = {
+  ROLES,
+  APPLICATION_STATUS,
+  JOB_TYPES,
+  YEARS,
+  DEPARTMENTS,
+};

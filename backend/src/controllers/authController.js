@@ -54,8 +54,8 @@ const registerUser = async(req, res) => {
 
         // Success message.
         res.status(201).json({
-            message: "User registered Successfully.",
-            userId: user._id
+            success: true,
+            message: "User registered Successfully."
         });
     } catch(error) {
         console.error("Register error:", error);
@@ -81,7 +81,7 @@ const loginUser = async(req, res) => {
         // Find User.
         const user = await User.findOne({email});
         if(!user) {
-            return res.status(400).json({
+            return res.status(401).json({
                 message: "Invalid email or password."
             });
         }
@@ -105,17 +105,20 @@ const loginUser = async(req, res) => {
 
         // Success Response.
         res.status(200).json({
+            success: true,
             message: "Login successful",
-            token,
-            user: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                role: user.role
+            data: {
+                token,
+                user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    role: user.role
+                }
             }
         });
     } catch(error) {
-        console.log("Error occured:", error)
+        console.log("Error occurred:", error)
         res.status(500).json({
             message: "Server error"
         });
