@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const { protect, authorize } = require("./middleware/authMiddleware");
 const companyRoutes = require("./routes/companyRoutes");
+const applicationRoutes = require("./routes/applicationRoutes");
 
 const app = express();
 
@@ -44,3 +45,5 @@ app.get(
 );
 
 app.use("/api/companies", companyRoutes);
+
+app.use("/api/applications", applicationRoutes);
