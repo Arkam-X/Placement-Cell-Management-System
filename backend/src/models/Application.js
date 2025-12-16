@@ -9,7 +9,7 @@ const applicationSchema = new mongoose.Schema(
         },
         company: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "ListedComapany",
+            ref: "ListedCompany",
             required: true
         },
         status: {

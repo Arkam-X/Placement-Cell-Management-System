@@ -53,4 +53,102 @@ const applyForCompany = async(req, res) => {
     }
 };
 
-module.exports = {applyForCompany};
+const getMyApplications = async(req, res) => {
+    try {
+        const studentId = req.user._id;
+
+        const applications = await Application.find({student: studentId}).populate({
+            path: "company",
+            select: "companyName roleOffered jobType internshipDurationMonths minimumCGPA criteria isActive"
+        }).sort({createdAt: -1});
+
+        res.status(200).json({
+            count: applications.length,
+            applications
+        });
+    } catch(error) {
+        console.error("Get my applications error:", error);
+        res.status(500).json({
+            message: "Server errro while fetching applications."
+        });
+    }
+};
+
+const getApplicantsByCompany = async(req, res) => {
+    try {
+        const { companyId } = req.params;
+
+        if(!companyId) {
+            return res.status(400).json({
+                message: "Company ID is required"
+            });
+        }
+
+        const applications = await Application.find({ company: companyId })
+        .populate({
+        path: "student",
+        select: "name email department year cgpa",
+        })
+        .populate({
+        path: "company",
+        select: "companyName roleOffered jobType",
+        })
+        .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            count: applications.length,
+            applications
+        });
+    } catch(error) {
+        console.error("Get applicants by company error:", error);
+        res.status(500),json({
+            message: "Server error while fetching applicants"
+        });
+    }
+};
+
+const updateApplicationStatus = async(req, res) => {
+    try {
+        const { applicationId } = req.params;
+        const { status } = req.body;
+
+        const allowedStatus = ["APPLIED", "SHORTLISTED", "REJECTED", "SELECTED"];
+
+        if(!allowedStatus.includes(status)) {
+            return res.status(400).json({
+                message: "Invalid application status."
+            });
+        }
+
+        const application = await Application.findById(applicationId)
+        .populate({
+            path: "student",
+            select: "name email"
+        })
+        .populate({
+            path: "company",
+            select: "companyName roleOffered"
+        });
+
+        if(!application) {
+            return res.status(404).json({
+                message: "Application not found"
+            });
+        }
+
+        application.status = status;
+        await application.save();
+
+        res.status(200).json({
+            message: "Application status updated successfully.",
+            application
+        });
+    } catch(error) {
+        console.error("Update application status error:", error);
+        res.status(500).json({
+            message: "Server error while updating application status"
+        });
+    }
+}
+
+module.exports = {applyForCompany, getMyApplications, getApplicantsByCompany, updateApplicationStatus};
