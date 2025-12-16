@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const { protect, authorize } = require("./middleware/authMiddleware");
 const companyRoutes = require("./routes/companyRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const { ROLES } = require("./utils/constants");
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.get("/api/protected", protect, (req, res) => {
   });
 });
 
-app.get("/api/tpo-only", protect, authorize("TPO"), (req, res) => {
+app.get("/api/tpo-only", protect, authorize(ROLES.TPO), (req, res) => {
     res.json({
       message: "Welcome TPO, you have admin access",
       user: req.user,
