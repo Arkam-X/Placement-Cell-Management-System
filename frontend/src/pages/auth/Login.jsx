@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { loginUser } from "../../api/auth.api";
 import { useAuth } from "../../context/AuthContext";
+
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -60,6 +61,12 @@ const Login = () => {
 
         <button type="submit">Login</button>
       </form>
+      <p style={{ marginTop: "10px" }}>
+        New student?{" "}
+        <Link to="/register" style={{ color: "blue" }}>
+         Register here
+        </Link>
+      </p>
     </div>
   );
 };

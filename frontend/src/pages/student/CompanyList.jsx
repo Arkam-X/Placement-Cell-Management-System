@@ -10,7 +10,7 @@ const CompanyList = () => {
     const fetchCompanies = async () => {
         try {
         const res = await getCompanies();
-        setCompanies(res.companies);
+        setCompanies(res.data);
         } catch (err) {
         setError("Failed to load companies");
         }
@@ -19,14 +19,15 @@ const CompanyList = () => {
     fetchCompanies();
     }, []);
 
-  const handleApply = async (companyId) => {
-    try {
-      const res = await applyForCompany(companyId);
-      alert(res.message);
-    } catch (err) {
-      alert(err.response?.data?.message || "Apply failed");
-    }
-  };
+    const handleApply = async (companyId) => {
+      try {
+        await applyForCompany(companyId);
+        alert("Applied successfully");
+      } catch (err) {
+        alert(err.response?.data?.message || "Apply failed");
+      }
+    };
+
 
   return (
     <div>
@@ -41,8 +42,8 @@ const CompanyList = () => {
           <p>Role: {company.roleOffered}</p>
           <p>Job Type: {company.jobType}</p>
           <p>Months: {company.internshipDurationMonths}</p>
-          <p>Department: {company.allowedDepartments}</p>
-          <p>Years: {company.allowedYears}</p>
+          <p>Department: {company.allowedDepartments.join(", ")}</p>
+          <p>Years: {company.allowedYears.join(", ")}</p>
           <p>Criteria: {company.criteria}</p>
           <p>T&C: {company.overviewTermsCondition}</p>
 

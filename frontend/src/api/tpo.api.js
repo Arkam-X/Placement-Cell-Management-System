@@ -14,3 +14,8 @@ export const updateApplicationStatus = async (applicationId, status) => {
   const res = await api.put(`/applications/${applicationId}/status`, { status });
   return res.data;
 };
+
+export const getAllStudents = async (params) => {
+  const res = await api.get("/tpo/students", { params });
+  return res.data;
+};

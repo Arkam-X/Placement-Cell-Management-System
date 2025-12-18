@@ -11,13 +11,13 @@ const APPLICATION_STATUS = {
 };
 
 const JOB_TYPES = {
-  FULL_TIME: "FULL_TIME",
+  FULL_TIME: "FULL TIME",
   INTERNSHIP: "INTERNSHIP",
 };
 
 const YEARS = ["FE", "SE", "TE", "BE"];
 
-const DEPARTMENTS = ["AIML", "IOT", "CE", "MECH", "CIVIL", "EXTC"];
+const DEPARTMENTS = ["AIML", "IOT", "CE", "MECH", "CIVIL", "EXTC", "IT"];
 
 module.exports = {
   ROLES,

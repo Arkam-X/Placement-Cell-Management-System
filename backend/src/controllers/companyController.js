@@ -1,8 +1,9 @@
 const ListedCompany = require("../models/ListedCompany");
+const Application = require("../models/Application");
 
 const addCompany = async(req, res) => {
     try {
-        const {
+        let {
             companyName,
             roleOffered,
             jobType,
@@ -15,7 +16,40 @@ const addCompany = async(req, res) => {
             companyLogo
         } = req.body;
 
-        if(!companyName || !roleOffered || !jobType || !internshipDurationMonths || !minimumCGPA || !allowedDepartments || !allowedYears || !criteria || !overviewTermsCondition) {
+        // Basic validation
+        if (
+          !companyName ||
+          !roleOffered ||
+          !jobType ||
+          !minimumCGPA ||
+          !allowedDepartments ||
+          !allowedYears ||
+          !criteria ||
+          !overviewTermsCondition
+        ) {
+          return res.status(400).json({
+            message: "Please provide all required fields."
+          });
+        }
+
+        if (typeof allowedDepartments === "string") {
+          allowedDepartments = allowedDepartments.split(/[, ]+/);
+        }
+
+        if (typeof allowedYears === "string") {
+          allowedYears = allowedYears.split(/[, ]+/);
+        }
+
+        allowedDepartments = allowedDepartments
+          .map(dep => dep.trim())
+          .filter(Boolean);
+
+        allowedYears = allowedYears
+          .map(year => year.trim())
+          .filter(Boolean);
+
+
+        if(!companyName || !roleOffered || !jobType || !minimumCGPA || !allowedDepartments || !allowedYears || !criteria || !overviewTermsCondition) {
             return res.status(400).json({
                 message: "Please provide all required fields."
             });
@@ -60,8 +94,35 @@ const getCompanies = async (req, res) => {
     // STUDENT view
     if (req.user.role === "STUDENT") {
       filter.isActive = true;
-      selectFields =
-        "companyName roleOffered jobType internshipDurationMonths minimumCGPA allowedDepartments allowedYears criteria overviewTermsCondition isActive createdAt";
+
+      const companies = await ListedCompany.find(filter)
+        .select(
+          "companyName roleOffered jobType internshipDurationMonths minimumCGPA allowedDepartments allowedYears criteria overviewTermsCondition isActive createdAt"
+        )
+        .sort({ createdAt: -1 });
+
+      // 🔑 Fetch student's applications
+      const applications = await Application.find({
+        student: req.user._id,
+      });
+
+      // Map companyId → status
+      const appliedMap = {};
+      applications.forEach((app) => {
+        appliedMap[app.company.toString()] = app.status;
+      });
+
+      // Attach application info to each company
+      const result = companies.map((company) => ({
+        ...company.toObject(),
+        hasApplied: !!appliedMap[company._id.toString()],
+        applicationStatus: appliedMap[company._id.toString()] || null,
+      }));
+
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
     }
 
     // TPO/Admin view

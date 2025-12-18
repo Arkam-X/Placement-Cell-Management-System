@@ -7,6 +7,7 @@ const { protect, authorize } = require("./middleware/authMiddleware");
 const companyRoutes = require("./routes/companyRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 const { ROLES } = require("./utils/constants");
+const tpoRoutes = require("./routes/tpoRoutes");
 
 const app = express();
 
@@ -44,3 +45,5 @@ app.get("/api/tpo-only", protect, authorize(ROLES.TPO), (req, res) => {
 app.use("/api/companies", companyRoutes);
 
 app.use("/api/applications", applicationRoutes);
+
+app.use("/api/tpo", tpoRoutes);

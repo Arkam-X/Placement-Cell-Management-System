@@ -9,6 +9,7 @@ import MyApplications from "./pages/student/MyApplications";
 import AddCompany from "./pages/tpo/AddCompany";
 import Applicants from "./pages/tpo/Applicants";
 import TPOCompanyList from "./pages/tpo/CompanyList";
+import StudentsTable from "./pages/tpo/StudentsTable";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
       <Route path="/tpo/add-company" element={<ProtectedRoute allowedRoles={["TPO"]}> <AddCompany/> </ProtectedRoute>}></Route>
       <Route path="/tpo/companies" element={<ProtectedRoute allowedRoles={["TPO"]}> <TPOCompanyList/> </ProtectedRoute>}></Route>
       <Route path="/tpo/applicants/:companyId" element={<ProtectedRoute allowedRoles={["TPO"]}> <Applicants/> </ProtectedRoute>}></Route>
+      <Route path="/tpo/students" element={<ProtectedRoute allowedRoles={["TPO"]}> <StudentsTable/> </ProtectedRoute>}/>
 
       <Route path="*" element={<h2>Page not found</h2>}/>
     </Routes>

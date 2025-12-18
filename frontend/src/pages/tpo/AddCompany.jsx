@@ -23,8 +23,8 @@ const AddCompany = () => {
 
     const payload = {
       ...form,
-      allowedDepartments: form.allowedDepartments.split(","),
-      allowedYears: form.allowedYears.split(","),
+      allowedDepartments: form.allowedDepartments.split(/[, ]+/).map(d => d.trim()).filter(Boolean),
+      allowedYears: form.allowedYears.split(/[, ]+/).map(y => y.trim()).filter(Boolean)
     };
 
     try {
@@ -42,12 +42,16 @@ const AddCompany = () => {
       <form onSubmit={handleSubmit}>
         <input name="companyName" placeholder="Company Name" onChange={handleChange} /><br />
         <input name="roleOffered" placeholder="Role Offered" onChange={handleChange} /><br />
-        <input name="jobType" placeholder="Job Type" onChange={handleChange} /><br />
-        <input name="internshipDurationMonths" placeholder="Internship Months" onChange={handleChange} /><br />
+        <select name="jobType" onChange={handleChange}>
+          <option value="">Select Job Type</option>
+          <option value="FULL TIME">FULL TIME</option>
+          <option value="INTERNSHIP">INTERNSHIP</option>
+        </select> <br />
+        <input name="internshipDurationMonths" placeholder="Internship duration" onChange={handleChange} /><br />
         <input name="minimumCGPA" placeholder="Minimum CGPA" onChange={handleChange} /><br />
         <input name="criteria" placeholder="Criteria" onChange={handleChange} /><br />
-        <input name="allowedDepartments" placeholder="Allowed Departments (comma separated)" onChange={handleChange} /><br />
-        <input name="allowedYears" placeholder="Allowed Years (comma separated)" onChange={handleChange} /><br />
+        <input name="allowedDepartments" placeholder="AIML, IOT, IT, CE, MECH, CIVIL, EXTC" onChange={handleChange} /><br />
+        <input name="allowedYears" placeholder="FE, SE, TE, BE" onChange={handleChange} /><br />
         <input name="overviewTermsCondition" placeholder="T&C URL" onChange={handleChange} /><br />
 
         <button type="submit">Add Company</button>

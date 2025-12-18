@@ -9,6 +9,7 @@ const registerUser = async(req, res) => {
             password,
             role,
             department,
+            prn,
             year,
             cgpa
         } = req.body;
@@ -22,9 +23,9 @@ const registerUser = async(req, res) => {
 
         // Student specific validation.
         if(role === "STUDENT") {
-            if(!department || !year || !cgpa) {
+            if(!department || !prn || !year || !cgpa) {
                 return res.status(400).json({
-                    message: "Department, Year and CGPA are required for students."
+                    message: "Department, PRN, Year and CGPA are required for students."
                 });
             }
         }
@@ -48,6 +49,7 @@ const registerUser = async(req, res) => {
             password: hashedPassword,
             role,
             department,
+            prn,
             year,
             cgpa
         });

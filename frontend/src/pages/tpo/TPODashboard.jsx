@@ -12,6 +12,8 @@ const TPODashboard = () => {
         <br />
          <Link to="/tpo/companies">View Companies</Link>
          <br />
+         <Link to="/tpo/students">View Students</Link>
+         <br />
         <button onClick={logout}>Logout</button>
       </nav>
     </div>

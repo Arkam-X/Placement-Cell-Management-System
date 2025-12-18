@@ -6,7 +6,7 @@ const { protect, authorize } = require("../middleware/authMiddleware");
 const { ROLES } = require("../utils/constants");
 
 // Apply for company Student.
-router.post("/", protect, authorize(ROLES.STUDENT), applyForCompany);
+router.post("/apply", protect, authorize(ROLES.STUDENT), applyForCompany);
 
 // View applications Student.
 router.get("/my", protect, authorize(ROLES.STUDENT), getMyApplications);
