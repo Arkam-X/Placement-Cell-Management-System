@@ -10,11 +10,13 @@ import AddCompany from "./pages/tpo/AddCompany";
 import Applicants from "./pages/tpo/Applicants";
 import TPOCompanyList from "./pages/tpo/CompanyList";
 import StudentsTable from "./pages/tpo/StudentsTable";
+import Landing from "./pages/Landing";
 
 const App = () => {
   return (
     <BrowserRouter>
     <Routes>
+      <Route path="/" element={<Landing />}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
 
