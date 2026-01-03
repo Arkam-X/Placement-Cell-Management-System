@@ -20,7 +20,7 @@ body {
   justify-content: space-between;
   padding: 14px 28px;
   backdrop-filter: blur(14px);
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0);
   border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }

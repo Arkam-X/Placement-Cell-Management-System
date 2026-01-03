@@ -7,7 +7,7 @@ const Footer = () => {
         © 2025 Recruitment Portal · Built for seamless placement management
       </p>
       <p>
-        Contact: placement@college.edu
+        Contact: placement@college.edu &nbsp;&nbsp;&nbsp; Developer: M. Arkam Chaudhary
       </p>
     </footer>
   );

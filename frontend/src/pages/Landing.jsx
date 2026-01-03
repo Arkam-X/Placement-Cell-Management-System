@@ -30,7 +30,7 @@ const Landing = () => {
         </h1>
 
         <p className="subtitle">
-          A complete solution for placement activities
+          One solution for Placement Activities
         </p>
 
         <div className="animated-text">
