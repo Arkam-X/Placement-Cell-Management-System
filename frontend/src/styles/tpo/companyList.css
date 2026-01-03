@@ -1,0 +1,71 @@
+.tpo-company-page {
+  padding: 40px 8%;
+  background: #f7f9fc;
+  min-height: 100vh;
+}
+
+.tpo-company-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #3d52a0;
+  margin-bottom: 24px;
+}
+
+.tpo-company-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+
+/* Card */
+.tpo-company-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tpo-company-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1f2a44;
+}
+
+.tpo-company-meta {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Applicants badge */
+.applicants-badge {
+  margin-top: 12px;
+  display: inline-block;
+  background: #ede8f5;
+  color: #3d52a0;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Button */
+.view-applicants-btn {
+  margin-top: 18px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0fa4af, #024950);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.view-applicants-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(15, 164, 175, 0.35);
+}
