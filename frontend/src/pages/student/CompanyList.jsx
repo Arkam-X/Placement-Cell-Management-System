@@ -1,57 +1,111 @@
 import { useEffect, useState } from "react";
 import { getCompanies } from "../../api/company.api";
 import { applyForCompany } from "../../api/application.api";
+import "../../styles/student/companyList.css";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
   const [error, setError] = useState("");
+  const [expanded, setExpanded] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchCompanies = async () => {
-        try {
+      try {
         const res = await getCompanies();
         setCompanies(res.data);
-        } catch (err) {
+      } catch {
         setError("Failed to load companies");
-        }
-    };
-
-    fetchCompanies();
-    }, []);
-
-    const handleApply = async (companyId) => {
-      try {
-        await applyForCompany(companyId);
-        alert("Applied successfully");
-      } catch (err) {
-        alert(err.response?.data?.message || "Apply failed");
       }
     };
 
+    fetchCompanies();
+  }, []);
+
+  const handleApply = async (companyId) => {
+    try {
+      await applyForCompany(companyId);
+      alert("Applied successfully");
+    } catch (err) {
+      alert(err.response?.data?.message || "Apply failed");
+    }
+  };
 
   return (
-    <div>
-      <h2>Available Companies</h2>
+    <div className="company-page">
+      <h2 className="company-title">Available Companies</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {companies.map((company) => (
-        <div key={company._id} style={{ border: "1px solid #ccc", margin: 10 }}>
-          <h3>{company.companyName}</h3>
-          <p>Min CGPA: {company.minimumCGPA}</p>
-          <p>Role: {company.roleOffered}</p>
-          <p>Job Type: {company.jobType}</p>
-          <p>Months: {company.internshipDurationMonths}</p>
-          <p>Department: {company.allowedDepartments.join(", ")}</p>
-          <p>Years: {company.allowedYears.join(", ")}</p>
-          <p>Criteria: {company.criteria}</p>
-          <p>T&C: {company.overviewTermsCondition}</p>
+      <div className="company-grid">
+        {companies.map((company) => (
+          <div key={company._id} className="company-card">
+            <div className="company-header">
+              <h3 className="company-name">{company.companyName}</h3>
+              <span className="cgpa-badge">
+                Min CGPA: {company.minimumCGPA}
+              </span>
+            </div>
 
-          <button onClick={() => handleApply(company._id)}>
-            Apply
-          </button>
-        </div>
-      ))}
+            <div className="company-meta">
+              <p>
+                <strong>Role:</strong> {company.roleOffered}
+              </p>
+              <p>
+                <strong>Job Type:</strong> {company.jobType}
+              </p>
+            </div>
+
+            <div className="badge-group">
+              {company.allowedDepartments.map((dep) => (
+                <span key={dep} className="badge">
+                  {dep}
+                </span>
+              ))}
+            </div>
+
+            <div className="badge-group">
+              {company.allowedYears.map((year) => (
+                <span key={year} className="badge">
+                  {year}
+                </span>
+              ))}
+            </div>
+
+            <button
+              className="expand-btn"
+              onClick={() =>
+                setExpanded(expanded === company._id ? null : company._id)
+              }
+            >
+              {expanded === company._id ? "Hide details ▲" : "View details ▼"}
+            </button>
+
+            {expanded === company._id && (
+              <div className="company-details">
+                {company.internshipDurationMonths && (
+                  <p>
+                    <strong>Duration:</strong>{" "}
+                    {company.internshipDurationMonths} months
+                  </p>
+                )}
+                <p>
+                  <strong>Criteria:</strong> {company.criteria}
+                </p>
+                <p>
+                  <strong>T&C:</strong> {company.overviewTermsCondition}
+                </p>
+              </div>
+            )}
+
+            <button
+              className="apply-btn"
+              onClick={() => handleApply(company._id)}
+            >
+              Apply
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

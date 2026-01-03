@@ -1,0 +1,70 @@
+.applications-page {
+  padding: 40px 8%;
+  background: #f7f9fc;
+  min-height: 100vh;
+}
+
+.applications-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #3d52a0;
+  margin-bottom: 24px;
+}
+
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+
+/* Card */
+.application-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.application-company {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1f2a44;
+  margin-bottom: 6px;
+}
+
+.application-meta {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 4px 0;
+}
+
+/* Status badge */
+.status-badge {
+  margin-top: 12px;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Status colors */
+.status-APPLIED {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-SHORTLISTED {
+  background: #ede8f5;
+  color: #3d52a0;
+}
+
+.status-REJECTED {
+  background: #fdecea;
+  color: #c62828;
+}
+
+.status-SELECTED {
+  background: #e8f5e9;
+  color: #2e7d32;
+}

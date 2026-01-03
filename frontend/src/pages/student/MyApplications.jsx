@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { getMyApplications } from "../../api/application.api";
+import "../../styles/student/myApplications.css";
 
 const MyApplications = () => {
   const [applications, setApplications] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchApplications = async () => {
-      const res = await getMyApplications();
-      if (res.success) {
-        setApplications(res.data);
+      try {
+        const res = await getMyApplications();
+        if (res.success) {
+          setApplications(res.data);
+        }
+      } catch {
+        setError("Failed to load applications");
       }
     };
 
@@ -16,18 +22,39 @@ const MyApplications = () => {
   }, []);
 
   return (
-    <div>
-      <h2>My Applications</h2>
+    <div className="applications-page">
+      <h2 className="applications-title">My Applications</h2>
 
-      {applications.map((app) => (
-        <div key={app._id} style={{ border: "1px solid #ccc", margin: 10 }}>
-          <h4>{app.company.companyName}</h4>
-          <p>Role: {app.company.roleOffered}</p>
-          <p>Job Type: {app.company.jobType}</p>
-          <p>Months: {app.company.internshipDurationMonths}</p>
-          <p>Status: {app.status}</p>
-        </div>
-      ))}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      <div className="applications-grid">
+        {applications.map((app) => (
+          <div key={app._id} className="application-card">
+            <h3 className="application-company">
+              {app.company.companyName}
+            </h3>
+
+            <p className="application-meta">
+              <strong>Role:</strong> {app.company.roleOffered}
+            </p>
+
+            <p className="application-meta">
+              <strong>Job Type:</strong> {app.company.jobType}
+            </p>
+
+            {app.company.internshipDurationMonths && (
+              <p className="application-meta">
+                <strong>Duration:</strong>{" "}
+                {app.company.internshipDurationMonths} months
+              </p>
+            )}
+
+            <span className={`status-badge status-${app.status}`}>
+              {app.status}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
