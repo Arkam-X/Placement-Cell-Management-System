@@ -1,0 +1,116 @@
+.students-page {
+  padding: 30px 6%;
+  background: #f7f9fc;
+  min-height: 100vh;
+}
+
+.students-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #3d52a0;
+  margin-bottom: 20px;
+}
+
+/* Filters */
+.filters-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+.filter-input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.filter-input:focus {
+  border-color: #7091e6;
+  outline: none;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-btn {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.apply-btn {
+  background: #ede8f5;
+  color: #3d52a0;
+}
+
+.export-btn {
+  background: linear-gradient(135deg, #0fa4af, #024950);
+  color: #ffffff;
+}
+
+/* Table */
+.table-wrapper {
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.students-table thead {
+  background: #ede8f5;
+}
+
+.students-table th,
+.students-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.students-table th {
+  font-weight: 600;
+  color: #3d52a0;
+}
+
+.students-table tbody tr:hover {
+  background: #f9faff;
+}
+
+/* Status badges */
+.status {
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+}
+
+.status-SL {
+  background: #ede8f5;
+  color: #3d52a0;
+}
+
+.status-R {
+  background: #fdecea;
+  color: #c62828;
+}
+
+.status-S {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
